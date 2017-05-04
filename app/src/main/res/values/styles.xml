@@ -13,19 +13,14 @@
             <enum name="rectangle" value="0" />
             <enum name="oval" value="1" />
         </attr>
-
         <attr name="solidNormal" format="color" />
         <attr name="solidPressed" format="color" />
-
         <attr name="cornersRadius" format="dimension" />
         <attr name="cornerTopLeft" format="dimension" />
         <attr name="cornerTopRight" format="dimension" />
         <attr name="cornerBottomLeft" format="dimension" />
         <attr name="cornerBottomRight" format="dimension" />
-
         <attr name="strokeWidth" format="dimension" />
         <attr name="strokeColor" format="color" />
-
-
     </declare-styleable>
 </resources>

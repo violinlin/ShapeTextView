@@ -33,7 +33,6 @@ public class ShapeTextView extends TextView {
     private float strokeWidth;
     private int strokeColor;
 
-    //    private
     public ShapeTextView(Context context) {
         this(context, null);
     }
@@ -73,10 +72,11 @@ public class ShapeTextView extends TextView {
         setClickable(true);
         // normal state
         GradientDrawable drawableNormal = new GradientDrawable();
+        // 设置Shape
         drawableNormal.setShape(shape);
-
+        // 设置圆角半径
         drawableNormal.setCornerRadius(cornersRadius);
-
+        // 圆角半径(每个圆角半径的值)
         if (cornersRadius == 0) {
             drawableNormal.setCornerRadii(new float[]{
                     cornersTopLeft, cornersTopLeft,
@@ -84,8 +84,9 @@ public class ShapeTextView extends TextView {
                     cornersBottomRight, cornersBottomRight,
                     cornersBottomLeft, cornersBottomLeft});
         }
-
+        //描边的宽度和颜色
         drawableNormal.setStroke((int) strokeWidth, strokeColor);
+        //设置填充色
         drawableNormal.setColor(solidNormalColor);
 
 
@@ -105,7 +106,7 @@ public class ShapeTextView extends TextView {
 
         drawablePressed.setColor(solidPressedColor);
 
-// 设置背景选择器
+        // 设置背景选择器
         StateListDrawable stateListDrawable = new StateListDrawable();
 
         stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
