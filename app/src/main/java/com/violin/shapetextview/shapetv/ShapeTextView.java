@@ -70,34 +70,47 @@ public class ShapeTextView extends TextView {
 
     private void setShape() {
         setGravity(Gravity.CENTER);
+        setClickable(true);
+        // normal state
+        GradientDrawable drawableNormal = new GradientDrawable();
+        drawableNormal.setShape(shape);
 
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setShape(shape);
-
-
-        gradientDrawable.setCornerRadius(cornersRadius);
+        drawableNormal.setCornerRadius(cornersRadius);
 
         if (cornersRadius == 0) {
-            gradientDrawable.setCornerRadii(new float[]{cornersTopLeft, cornersTopLeft,
+            drawableNormal.setCornerRadii(new float[]{
+                    cornersTopLeft, cornersTopLeft,
                     cornersTopRight, cornersTopRight,
-                    cornersBottomLeft, cornersBottomLeft,
-                    cornersBottomRight, cornersBottomRight});
+                    cornersBottomRight, cornersBottomRight,
+                    cornersBottomLeft, cornersBottomLeft});
         }
 
-        gradientDrawable.setStroke((int) strokeWidth, strokeColor);
+        drawableNormal.setStroke((int) strokeWidth, strokeColor);
+        drawableNormal.setColor(solidNormalColor);
 
 
+        // pressed state
+        GradientDrawable drawablePressed = new GradientDrawable();
+        drawablePressed.setShape(shape);
+        drawablePressed.setCornerRadius(cornersRadius);
+        if (cornersRadius == 0) {
+            drawablePressed.setCornerRadii(new float[]{
+                    cornersTopLeft, cornersTopLeft,
+                    cornersTopRight, cornersTopRight,
+                    cornersBottomRight, cornersBottomRight,
+                    cornersBottomLeft, cornersBottomLeft});
+        }
+
+        drawablePressed.setStroke((int) strokeWidth, strokeColor);
+
+        drawablePressed.setColor(solidPressedColor);
+
+// 设置背景选择器
         StateListDrawable stateListDrawable = new StateListDrawable();
 
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
 
-        gradientDrawable.setColor(solidPressedColor);
-        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, gradientDrawable);
-
-        GradientDrawable pG=new GradientDrawable();
-        pG.setColor(solidNormalColor);
-        stateListDrawable.addState(new int[]{}, pG);
-
-
+        stateListDrawable.addState(new int[]{}, drawableNormal);
 
         setBackground(stateListDrawable);
 
