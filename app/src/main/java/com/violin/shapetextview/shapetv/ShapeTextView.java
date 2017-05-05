@@ -29,9 +29,18 @@ public class ShapeTextView extends TextView {
     private float cornersBottomLeft;
     private float cornersBottomRight;
 
+    //    渐变颜色属性
+    private int gradientStartColor;
+    private int gradientCenterCcolor;
+    private int gradientEndColor;
+
+    private int gradientOrientation;
 
     private float strokeWidth;
     private int strokeColor;
+
+    private int defaultColor = Color.parseColor("#00000000");
+    private GradientDrawable.Orientation[] orientations;
 
     public ShapeTextView(Context context) {
         this(context, null);
@@ -44,8 +53,8 @@ public class ShapeTextView extends TextView {
         shape = array.getInteger(R.styleable.ShapeTextView_shape, SHAPE_RECTANGEL);
 
 
-        solidNormalColor = array.getColor(R.styleable.ShapeTextView_solidNormal, Color.parseColor("#00000000"));
-        solidPressedColor = array.getColor(R.styleable.ShapeTextView_solidPressed, Color.parseColor("#00000000"));
+        solidNormalColor = array.getColor(R.styleable.ShapeTextView_solidNormal, defaultColor);
+        solidPressedColor = array.getColor(R.styleable.ShapeTextView_solidPressed, defaultColor);
 
 
         cornersRadius = array.getDimension(R.styleable.ShapeTextView_cornersRadius, 0);
@@ -57,8 +66,31 @@ public class ShapeTextView extends TextView {
 
         strokeWidth = array.getDimension(R.styleable.ShapeTextView_strokeWidth, 0);
 
-        strokeColor = array.getColor(R.styleable.ShapeTextView_strokeColor, Color.parseColor("#00000000"));
+        strokeColor = array.getColor(R.styleable.ShapeTextView_strokeColor, defaultColor);
+
+        gradientStartColor = array.getColor(R.styleable.ShapeTextView_gradientStartColor, defaultColor);
+
+        gradientCenterCcolor = array.getColor(R.styleable.ShapeTextView_gradientCenterColor, defaultColor);
+
+        gradientEndColor = array.getColor(R.styleable.ShapeTextView_gradientEndColor, defaultColor);
+
+        TypedArray orientationArray = context.obtainStyledAttributes(attrs, R.styleable.ShapeTextView);
+
+        gradientOrientation = orientationArray.getInteger(R.styleable.ShapeTextView_gradientOrientation, 6);
+
         array.recycle();
+
+
+        orientations = new GradientDrawable.Orientation[]{
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                GradientDrawable.Orientation.TR_BL,
+                GradientDrawable.Orientation.RIGHT_LEFT,
+                GradientDrawable.Orientation.BR_TL,
+                GradientDrawable.Orientation.BOTTOM_TOP,
+                GradientDrawable.Orientation.BL_TR,
+                GradientDrawable.Orientation.LEFT_RIGHT,
+                GradientDrawable.Orientation.TL_BR
+        };
     }
 
     @Override
@@ -87,7 +119,25 @@ public class ShapeTextView extends TextView {
         //描边的宽度和颜色
         drawableNormal.setStroke((int) strokeWidth, strokeColor);
         //设置填充色
-        drawableNormal.setColor(solidNormalColor);
+        if (solidNormalColor != defaultColor) {
+            drawableNormal.setColor(solidNormalColor);
+        } else {
+//            设置渐变色
+            int[] gradientColors;
+            if (gradientStartColor != defaultColor && gradientEndColor != defaultColor) {
+                gradientColors = new int[]{gradientStartColor, gradientEndColor};
+                if (gradientCenterCcolor != defaultColor) {
+                    gradientColors = new int[]{gradientStartColor, gradientCenterCcolor, gradientEndColor};
+                }
+                drawableNormal.setColors(gradientColors);
+
+
+                drawableNormal.setOrientation(orientations[gradientOrientation]);
+            } else {
+                drawableNormal.setColor(solidNormalColor);
+            }
+
+        }
 
 
         // pressed state
@@ -109,7 +159,9 @@ public class ShapeTextView extends TextView {
         // 设置背景选择器
         StateListDrawable stateListDrawable = new StateListDrawable();
 
-        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+        if (solidPressedColor != defaultColor) {
+            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+        }
 
         stateListDrawable.addState(new int[]{}, drawableNormal);
 
