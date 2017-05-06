@@ -22,9 +22,14 @@
         <attr name="cornerBottomRight" format="dimension" />
         <attr name="strokeWidth" format="dimension" />
         <attr name="strokeColor" format="color" />
-        <attr name="gradientStartColor" format="color" />
-        <attr name="gradientCenterColor" format="color" />
-        <attr name="gradientEndColor" format="color" />
+        <attr name="gradientNormalStartColor" format="color" />
+        <attr name="gradientNormalCenterColor" format="color" />
+        <attr name="gradientNormalEndColor" format="color" />
+
+        <attr name="gradientPressedStartColor" format="color" />
+        <attr name="gradientPressedCenterColor" format="color" />
+        <attr name="gradientPressedEndColor" format="color" />
+
         <attr name="gradientOrientation" format="enum">
             <enum name="TOP_BOTTOM" value="0" />
             <enum name="TR_BL" value="1" />

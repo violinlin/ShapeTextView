@@ -30,9 +30,13 @@ public class ShapeTextView extends TextView {
     private float cornersBottomRight;
 
     //    渐变颜色属性
-    private int gradientStartColor;
-    private int gradientCenterCcolor;
-    private int gradientEndColor;
+    private int gradientNormalStartColor;
+    private int gradientNormalCenterColor;
+    private int gradientNormalEndColor;
+
+    private int gradientPressedStartColor;
+    private int gradientPressedCenterColor;
+    private int gradientPressedEndColor;
 
     private int gradientOrientation;
 
@@ -68,11 +72,17 @@ public class ShapeTextView extends TextView {
 
         strokeColor = array.getColor(R.styleable.ShapeTextView_strokeColor, defaultColor);
 
-        gradientStartColor = array.getColor(R.styleable.ShapeTextView_gradientStartColor, defaultColor);
+        gradientNormalStartColor = array.getColor(R.styleable.ShapeTextView_gradientNormalStartColor, defaultColor);
 
-        gradientCenterCcolor = array.getColor(R.styleable.ShapeTextView_gradientCenterColor, defaultColor);
+        gradientNormalCenterColor = array.getColor(R.styleable.ShapeTextView_gradientNormalCenterColor, defaultColor);
 
-        gradientEndColor = array.getColor(R.styleable.ShapeTextView_gradientEndColor, defaultColor);
+        gradientNormalEndColor = array.getColor(R.styleable.ShapeTextView_gradientNormalEndColor, defaultColor);
+
+
+        gradientPressedStartColor = array.getColor(R.styleable.ShapeTextView_gradientPressedStartColor, defaultColor);
+        gradientPressedCenterColor = array.getColor(R.styleable.ShapeTextView_gradientPressedCenterColor, defaultColor);
+        gradientPressedEndColor = array.getColor(R.styleable.ShapeTextView_gradientPressedEndColor, defaultColor);
+
 
         TypedArray orientationArray = context.obtainStyledAttributes(attrs, R.styleable.ShapeTextView);
 
@@ -124,10 +134,10 @@ public class ShapeTextView extends TextView {
         } else {
 //            设置渐变色
             int[] gradientColors;
-            if (gradientStartColor != defaultColor && gradientEndColor != defaultColor) {
-                gradientColors = new int[]{gradientStartColor, gradientEndColor};
-                if (gradientCenterCcolor != defaultColor) {
-                    gradientColors = new int[]{gradientStartColor, gradientCenterCcolor, gradientEndColor};
+            if (gradientNormalStartColor != defaultColor && gradientNormalEndColor != defaultColor) {
+                gradientColors = new int[]{gradientNormalStartColor, gradientNormalEndColor};
+                if (gradientNormalCenterColor != defaultColor) {
+                    gradientColors = new int[]{gradientNormalStartColor, gradientNormalCenterColor, gradientNormalEndColor};
                 }
                 drawableNormal.setColors(gradientColors);
 
@@ -162,7 +172,24 @@ public class ShapeTextView extends TextView {
         if (solidPressedColor != defaultColor) {
             stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
         }
+        int[] gradientPressdColors;
+        if (gradientPressedStartColor != defaultColor && gradientPressedEndColor != defaultColor) {
+            gradientPressdColors = new int[]{gradientPressedStartColor, gradientPressedEndColor};
+            if (gradientPressedCenterColor != defaultColor) {
+                gradientPressdColors = new int[]{gradientPressedStartColor, gradientPressedCenterColor, gradientPressedEndColor};
+            }
 
+            drawablePressed.setColors(gradientPressdColors);
+            drawablePressed.setOrientation(orientations[gradientOrientation]);
+            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+
+        }
+
+        if (isEnabled()) {
+            setAlpha(1.0f);
+        } else {
+            setAlpha(0.7f);
+        }
         stateListDrawable.addState(new int[]{}, drawableNormal);
 
         setBackground(stateListDrawable);

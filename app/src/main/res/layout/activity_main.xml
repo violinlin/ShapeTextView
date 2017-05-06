@@ -20,11 +20,14 @@
         android:text="rectangle1"
         android:textColor="#fff"
         android:textSize="14sp"
-        app:gradientStartColor="@color/colorPrimary"
-        app:gradientEndColor="@color/colorAccent"
         app:shape="rectangle"
-        app:gradientOrientation="BR_TL"
-        app:solidPressed="@color/colorPrimaryDark" />
+        android:enabled="false"
+        app:gradientNormalStartColor="#f67b2a"
+        app:gradientNormalEndColor="#fca446"
+        app:gradientPressedStartColor="#9b4c18"
+        app:gradientPressedEndColor="#bf7c34"
+        app:gradientOrientation="LEFT_RIGHT"
+        />
 
     <com.violin.shapetextview.shapetv.ShapeTextView
         android:layout_width="wrap_content"
@@ -76,7 +79,9 @@
         android:textColor="#fff"
         android:textSize="14sp"
         app:shape="oval"
+        android:enabled="false"
         app:solidNormal="@color/colorAccent"
+        app:solidPressed="@color/colorPrimary"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp" />
 </LinearLayout>
