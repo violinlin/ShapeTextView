@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="5dp"
+        android:enabled="false"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -20,14 +21,12 @@
         android:text="rectangle1"
         android:textColor="#fff"
         android:textSize="14sp"
-        app:shape="rectangle"
-        android:enabled="false"
-        app:gradientNormalStartColor="#f67b2a"
         app:gradientNormalEndColor="#fca446"
-        app:gradientPressedStartColor="#9b4c18"
-        app:gradientPressedEndColor="#bf7c34"
+        app:gradientNormalStartColor="#f67b2a"
         app:gradientOrientation="LEFT_RIGHT"
-        />
+        app:gradientPressedEndColor="#bf7c34"
+        app:gradientPressedStartColor="#9b4c18"
+        app:shape="rectangle" />
 
     <com.violin.shapetextview.shapetv.ShapeTextView
         android:layout_width="wrap_content"
@@ -67,10 +66,64 @@
         app:strokeWidth="1dp" />
 
     <com.violin.shapetextview.shapetv.ShapeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:text="rectangle4"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        app:cornersRadius="5dp"
+        app:gradientNormalEndColor="@color/colorPrimary"
+        app:gradientNormalStartColor="@color/colorAccent"
+        app:shape="rectangle"
+        app:strokeColor="@color/colorPrimaryDark"
+        app:strokeWidth="1dp" />
+
+    <com.violin.shapetextview.shapetv.ShapeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:text="rectangle5"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:cornersRadius="5dp"
+        app:shape="rectangle"
+        app:strokeColor="@color/colorPrimaryDark"
+        app:strokeWidth="1dp" />
+
+    <com.violin.shapetextview.shapetv.ShapeTextView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_margin="5dp"
+        android:enabled="false"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:text="oval"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:shape="oval"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
+
+    <com.violin.shapetextview.shapetv.ShapeTextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:enabled="false"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -79,7 +132,6 @@
         android:textColor="#fff"
         android:textSize="14sp"
         app:shape="oval"
-        android:enabled="false"
         app:solidNormal="@color/colorAccent"
         app:solidPressed="@color/colorPrimary"
         app:strokeColor="@color/colorPrimary"

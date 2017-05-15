@@ -4,7 +4,7 @@
 
 ## 效果预览
 
-![enter image description here](http://7xvvky.com1.z0.glb.clouddn.com/blog/view/shapetextview.gif)
+![enter image description here](http://7xvvky.com1.z0.glb.clouddn.com/blog/view/shapetextview.png)
 
 ## 属性的定义
 
